@@ -1,31 +1,23 @@
 package TeoInfo;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class RLE2 {
+import FileChooser.FileChooser;
+
+public class RLE {
 
 	public static String encode() throws IOException {
-		//String p = "io";
 		
 		StringBuffer bufferAuxiliar = new StringBuffer();
 		StringBuffer bufferEncodado = new StringBuffer();
 		
-		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setDialogTitle("Procurar Arquivos");
-		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator")+ "Downloads"));
+		FileChooser fileChooser = new FileChooser(FileChooser.TXT_E_EXE);
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt e .exe", "txt", "exe");
-		fileChooser.setFileFilter(filter);
-		
-		int resposta = fileChooser.showOpenDialog(null);
-		
-		if(resposta == JFileChooser.CANCEL_OPTION){
+		//Se a tecla apertada for a de Cancelar
+		if(fileChooser.open() == JFileChooser.CANCEL_OPTION){
 			System.out.println("Arquivo não selecionado");
 		}
 		else{
