@@ -1,48 +1,62 @@
 package TeoInfo;
 
-import java.io.FileNotFoundException;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class RLE2 {
 
-	public static String encode() {
-//String p = "io";
-StringBuffer destino = new StringBuffer();
-StringBuffer dest = new StringBuffer();
-		Scanner in;
-		try {
-			in = new Scanner(new FileReader("C:/alice29.txt"));
+	public static String encode() throws IOException {
+		//String p = "io";
+		
+		StringBuffer bufferAuxiliar = new StringBuffer();
+		StringBuffer bufferEncodado = new StringBuffer();
+		
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Procurar Arquivos");
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator")+ "Downloads"));
+		
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt e .exe", "txt", "exe");
+		fileChooser.setFileFilter(filter);
+		
+		int resposta = fileChooser.showOpenDialog(null);
+		
+		if(resposta == JFileChooser.CANCEL_OPTION){
+			System.out.println("Arquivo não selecionado");
+		}
+		else{
+			Scanner in = new Scanner(fileChooser.getSelectedFile());
+			
 			while (in.hasNextLine()) {
 			    String line = in.nextLine();
-			    destino.append(line+"\n");
+			    bufferAuxiliar.append(line+"\n");
 			    //O \n vai acrescentar  um Número extra no final de todo encode!
 			    
 			    //System.out.println(line);
 			    
 			    }
 			 
-		        for (int j = 0; j < destino.length(); j++) {
+		        for (int j = 0; j < bufferAuxiliar.length(); j++) {
 		            int runLength = 1;
-		            while (j+1 < destino.length() && destino.charAt(j) == destino.charAt(j+1)) {
+		            while (j+1 < bufferAuxiliar.length() && bufferAuxiliar.charAt(j) == bufferAuxiliar.charAt(j+1)) {
 		                runLength++;
 		                j++;
 		            }
-		            dest.append(runLength);
-		            dest.append(destino.charAt(j));
+		            bufferEncodado.append(runLength);
+		            bufferEncodado.append(bufferAuxiliar.charAt(j));
 		        }
-		       
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		        
+		    in.close();    
 		}
-
-		 return dest.toString();
-		}
+		
+		return bufferEncodado.toString();
+	}
+	
+	
 	public static String decode(String Fonte) {
 		  int count = 0;
 		    StringBuilder result = new StringBuilder () ;
@@ -65,7 +79,7 @@ StringBuffer dest = new StringBuffer();
 		}
 	
 
-	public static void main (String[] args) {
+	public static void main (String[] args) throws IOException {
 		System.out.println(encode());
 		//System.out.println(decode(encode()));
 		
