@@ -24,6 +24,6 @@ public class FileSaver {
 	}
 	
 	public int run(){
-		return fileSaver.showOpenDialog(null);
+		return fileSaver.showSaveDialog(null);
 	}
 }
