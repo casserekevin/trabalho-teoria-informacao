@@ -1,29 +1,30 @@
 package Coders;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
 
-import FileChooser.FileChooser;
+import FileOperators.FileOpener;
+import FileUtils.FileUtils;
 
 public class RLE {
+	
 
 	public String encode() {
 
 		StringBuffer bufferAuxiliar = new StringBuffer();
 		StringBuffer bufferEncodado = new StringBuffer();
 
-		FileChooser fileChooser = new FileChooser(FileChooser.TXT_E_EXE);
+		FileOpener fileOpener = new FileOpener(FileOpener.TXT_E_EXE);
 
 		// Se a tecla apertada for a de Cancelar
-		if (fileChooser.open() == JFileChooser.CANCEL_OPTION) {
+		if (fileOpener.run() == JFileChooser.CANCEL_OPTION) {
 			System.out.println("Arquivo não selecionado");
 		} else {
 			Scanner in = null;
 			try {
-				in = new Scanner(fileChooser.getSelectedFile());
+				in = new Scanner(fileOpener.getSelectedFile());
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -49,8 +50,9 @@ public class RLE {
 			}
 
 			in.close();
+			
+			FileUtils.salvar(bufferEncodado.toString());
 		}
-
 		return bufferEncodado.toString();
 	}
 
