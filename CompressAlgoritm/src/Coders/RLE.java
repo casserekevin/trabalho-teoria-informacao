@@ -4,14 +4,16 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
+import javax.swing.SingleSelectionModel;
 
 import FileOperators.FileOpener;
 import FileUtils.FileUtils;
+import Screens.ProcessorScreen;
 
 public class RLE {
 	
 
-	public String encode() {
+	public void encode() {
 
 		StringBuffer bufferAuxiliar = new StringBuffer();
 		StringBuffer bufferEncodado = new StringBuffer();
@@ -29,6 +31,9 @@ public class RLE {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			ProcessorScreen loading = new ProcessorScreen();
+			loading.setVisible(true);
 
 			while (in.hasNextLine()) {
 				String line = in.nextLine();
@@ -51,9 +56,10 @@ public class RLE {
 
 			in.close();
 			
+			loading.dispose();
+			
 			FileUtils.salvar(bufferEncodado.toString());
 		}
-		return bufferEncodado.toString();
 	}
 
 	public String decode(String Fonte) {
