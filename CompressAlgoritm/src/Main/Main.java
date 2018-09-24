@@ -10,6 +10,8 @@ public class Main {
 		
 		RLE rle = new RLE();
 		ExecutionManager executionManager = new ExecutionManager(rle, FileOpener.TXT);
+
+		//TIS BUT A SCRATCH
 		
 		executionManager.encodar();
 	}
