@@ -17,18 +17,23 @@ public class ExecutionManager {
 	}
 	
 	public void encodar(){
+		
 		Scanner in = FileUtils.SearchFile(tipoArquivo);
-		
-		ProcessorScreen loading = new ProcessorScreen();
-		loading.setVisible(true);
+		if(in == null){
+			System.out.println("Arquivo não encontrado");
+		}
+		else{
+			ProcessorScreen loading = new ProcessorScreen();
+			loading.setVisible(true);
 			
-		// Aki vai o código do Algorítmo de Compressao;
-		String encodado = coder.encode(in);
-		
-		in.close();
-		loading.dispose();
-		
-		FileUtils.salveFile(encodado);
+			// Aki vai o código do Algorítmo de Compressao;
+			String encodado = coder.encode(in);
+			
+			in.close();
+			loading.dispose();
+			
+			FileUtils.salveFile(encodado);			
+		}
 	}
 	
 	public void decodar(){

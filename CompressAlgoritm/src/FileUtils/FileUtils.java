@@ -35,7 +35,8 @@ public class FileUtils {
 		
 		// Se a tecla apertada for a de Cancelar
 		if (fileOpener.run() == JFileChooser.CANCEL_OPTION) {
-			System.out.println("Arquivo não selecionado");
+			return null;
+			
 		}
 		
 		return getScanner();
