@@ -20,9 +20,10 @@ public class ExecutionManager {
 		
 		Scanner in = FileUtils.SearchFile(tipoArquivo);
 		if(in == null){
-			System.out.println("Arquivo não encontrado");
+			System.out.println("Arquivo não selecionado");
 		}
 		else{
+			
 			ProcessorScreen loading = new ProcessorScreen();
 			loading.setVisible(true);
 			
