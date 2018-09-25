@@ -11,6 +11,7 @@ public class Main {
 		RLE rle = new RLE();
 		ExecutionManager executionManager = new ExecutionManager(rle, FileOpener.TXT);
 		
+		// Exemplo
 		executionManager.encodar();
 	}
 
