@@ -1,42 +1,69 @@
 package Manager;
 
-import java.util.Scanner;
-
-import Coders.Coders;
+import Coders.ICoders;
+import DTO.IInputOutputDTO;
+import FileOperators.FileOpener;
 import FileUtils.FileUtils;
 import Screens.ProcessorScreen;
 
 public class ExecutionManager {
 	
-	private Coders coder;
-	private int tipoArquivo;
+	private ICoders coder;
 
-	public ExecutionManager(Coders coder, int tipoArquivo){
+	public ExecutionManager(ICoders coder){
 		this.coder = coder;
-		this.tipoArquivo = tipoArquivo;
 	}
 	
-	public void encodar(){
+	public void encodar(int tipoArquivo){
 		
-		Scanner in = FileUtils.SearchFile(tipoArquivo);
-		if(in == null){
-			System.out.println("Arquivo não encontrado");
+		IInputOutputDTO inputAndFile = FileUtils.ChooseFileToOpen(tipoArquivo);
+		if(inputAndFile == null){
+			System.out.println("Input não encontrado");
 		}
 		else{
+			//tela de processamento
 			ProcessorScreen loading = new ProcessorScreen();
 			loading.setVisible(true);
 			
+			StringBuffer dadosLidos = FileUtils.read(inputAndFile);
 			// Aki vai o código do Algorítmo de Compressao;
-			String encodado = coder.encode(in);
+			String encodado = coder.encode(dadosLidos);
 			
-			in.close();
 			loading.dispose();
 			
-			FileUtils.salveFile(encodado);			
+			IInputOutputDTO outputAndFile = FileUtils.ChooseFileToSave(FileUtils.SAVE_TXT);
+			if(outputAndFile == null){
+				System.out.println("Output não encontrado");
+			}
+			else{
+				FileUtils.write(outputAndFile, encodado);
+			}	
+			
 		}
 	}
 	
 	public void decodar(){
 		
+		IInputOutputDTO inputAndFile = FileUtils.ChooseFileToOpen(FileOpener.TXT);
+		if(inputAndFile == null){
+			System.out.println("Input não encontrado");
+		}
+		else{
+			ProcessorScreen loading = new ProcessorScreen();
+			loading.setVisible(true);
+			
+			StringBuffer dadosLidos = FileUtils.read(inputAndFile);
+			String decodado = coder.decode(dadosLidos);
+			
+			loading.dispose();
+			
+			IInputOutputDTO outputAndFile = FileUtils.ChooseFileToSave(FileUtils.SAVE_PADRAO);
+			if(outputAndFile == null){
+				System.out.println("Output não encontrado");
+			}
+			else{
+				FileUtils.write(outputAndFile, decodado);
+			}
+		}
 	}
 }

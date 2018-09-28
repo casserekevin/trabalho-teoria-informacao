@@ -19,7 +19,11 @@ public class FileSaver {
 		fileSaver.setFileFilter(filter);
 	}
 	
-	public File getSelectedFile(){
+	public File getSelectedFile(boolean isTxt){
+		if(isTxt){
+			File file = new File(fileSaver.getSelectedFile().getAbsolutePath()+ ".txt");
+			return file;
+		}
 		return fileSaver.getSelectedFile();
 	}
 	
