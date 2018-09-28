@@ -32,26 +32,20 @@ public class RLE implements Coders{
 		return bufferEncodado.toString();
 	}
 	
-	@Override
 	public String decode(String Fonte) {
-		int count = 0;
-		StringBuilder result = new StringBuilder();
-		for (int i = 0; i < Fonte.length(); i++) {
-			char c = Fonte.charAt(i);
-			if (Character.isDigit(c)) {
-				count = count * 10 + c - '0';
-			} else {
-				if (count == 0) {
-
-					count = 1;
+		StringBuilder dest = new StringBuilder();
+			
+			for (int i = 0; i < Fonte.length() -1; i+=1+1 ) {
+				char charAt = Fonte.charAt(i+1);
+				int cnt = Fonte.charAt(i ) - '0';
+				for (int j = 0; j < cnt; j++) {
+					dest.append(charAt);
 				}
-				while (count > 0) {
-					result.append(c);
-					count--;
-				}
-			}
 
+			
+			
 		}
-		return result.toString();
+			return dest.toString();
 	}
+	
 }
