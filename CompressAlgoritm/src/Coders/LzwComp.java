@@ -12,13 +12,7 @@ public class LzwComp {
     public byte[] buffer = new byte[3];
     public boolean onleft = true;
 
-    /**
-     * recebe  o nome de um arquivo que não esta encodado e vai encodar ele.
-     * coloca um .lzw no final do nome do arquivo
-     *
-     * @param uncompressed -Nome do arquivo uncompr sendo comprimido
-     * @throws java.io.IOException -falha input/output
-     */
+    //Recebe um arquivo para comprimir
     public void compress(String uncompressed) throws IOException {
         // Dictionary size limit, builds dictionary
         for (int i = 0; i < 256; i++) {
@@ -122,41 +116,8 @@ public class LzwComp {
         }
         return str;
     }
-
-    /**
-     * depois de criar o obj lzw, procura por um imput do usário por um arquivo para comprimir, e
-     * printa o conteúdo do arquivo sendo comprimido junt com valroes integer dos
-     *caracteres sendo compressed, via retornar o nome do arquivo com .lzw no final
-     *
-     * @param args - The command line arguments
-     * @throws java.io.IOException - File input/output failure
-     */
-    public static void main(String[] args) throws IOException {
-        try {
-            LzwComp lzw = new LzwComp();
-
-            Scanner input = new Scanner(System.in);
-
-            System.out.println("Coloque o nome do (input.txt) arquivo.");
-
-            String str = input.nextLine();
-
-            File file = new File(str);
-
-            Scanner fileScanner = new Scanner(file);
-
-            String line = "";
-
-            while (fileScanner.hasNext()) {
-                line = fileScanner.nextLine();
-                System.out.println("Comprimindo o conteúdo do arquivo: \n"
-                        + line);
-            }
-            lzw.compress(str);
-            System.out.println("\nA compressão foi um sucesso!");
-            System.out.println("Seu novo arquivo se chama: " + str.concat(".lzw"));
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo não encontrado!");
-        }
-    }
+    
+    
+    
+    
 }
