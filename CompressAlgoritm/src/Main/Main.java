@@ -1,6 +1,7 @@
 package Main;
 
 import Coders.RLE;
+import FileOperators.FileOpener;
 import Manager.ExecutionManager;
 
 public class Main {
@@ -10,8 +11,8 @@ public class Main {
 		RLE rle = new RLE();
 		ExecutionManager executionManager = new ExecutionManager(rle);
 		
-//		executionManager.encodar(FileOpener.TXT_E_EXE);
-		executionManager.decodar();
+		executionManager.encodar(FileOpener.TXT_E_EXE);
+//		executionManager.decodar();
 	}
 
 }
