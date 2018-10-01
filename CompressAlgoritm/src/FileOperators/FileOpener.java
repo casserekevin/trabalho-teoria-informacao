@@ -7,8 +7,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class FileOpener {
 	
-	public static final int TXT = 1;
-	public static final int TXT_E_EXE = 2;
+	public static final int PADRAO = 1;
+	public static final int LZW = 2;
 	
 	private JFileChooser fileOpener;
 	
@@ -20,14 +20,10 @@ public class FileOpener {
 		fileOpener.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator")+ "Downloads"));
 		
 		FileNameExtensionFilter filter = null;
-		if(tipoArquivo == TXT){
-			filter = new FileNameExtensionFilter(".txt", "txt");		
+		if(tipoArquivo == LZW){
+			filter = new FileNameExtensionFilter(".lzw", "lzw");	
+			fileOpener.setFileFilter(filter);
 		}
-		else if(tipoArquivo == TXT_E_EXE){
-			filter = new FileNameExtensionFilter(".txt e .exe", "txt", "exe");
-		}
-		fileOpener.setFileFilter(filter);
-		
 	}
 	
 	public File getSelectedFile(){

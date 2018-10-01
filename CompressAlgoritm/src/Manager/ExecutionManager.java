@@ -14,9 +14,9 @@ public class ExecutionManager {
 		this.coder = coder;
 	}
 	
-	public void encodar(int tipoArquivo){
+	public void encodar(){
 		
-		IInputOutputDTO inputAndFile = FileUtils.ChooseFileToOpen(tipoArquivo);
+		IInputOutputDTO inputAndFile = FileUtils.ChooseFileToOpen(FileOpener.PADRAO );
 		if(inputAndFile == null){
 			System.out.println("Input não encontrado");
 		}
@@ -25,13 +25,13 @@ public class ExecutionManager {
 			ProcessorScreen loading = new ProcessorScreen();
 			loading.setVisible(true);
 			
-			StringBuffer dadosLidos = FileUtils.read(inputAndFile);
+			byte[] dadosLidos = FileUtils.read(inputAndFile);
 			// Aki vai o código do Algorítmo de Compressao;
-			String encodado = coder.encode(dadosLidos);
+			byte[] encodado = coder.encode(dadosLidos);
 			
 			loading.dispose();
 			
-			IInputOutputDTO outputAndFile = FileUtils.ChooseFileToSave(FileUtils.SAVE_TXT);
+			IInputOutputDTO outputAndFile = FileUtils.ChooseFileToSave(FileUtils.SAVE_LZW);
 			if(outputAndFile == null){
 				System.out.println("Output não encontrado");
 			}
@@ -44,7 +44,7 @@ public class ExecutionManager {
 	
 	public void decodar(){
 		
-		IInputOutputDTO inputAndFile = FileUtils.ChooseFileToOpen(FileOpener.TXT);
+		IInputOutputDTO inputAndFile = FileUtils.ChooseFileToOpen(FileOpener.LZW);
 		if(inputAndFile == null){
 			System.out.println("Input não encontrado");
 		}
@@ -52,8 +52,9 @@ public class ExecutionManager {
 			ProcessorScreen loading = new ProcessorScreen();
 			loading.setVisible(true);
 			
-			StringBuffer dadosLidos = FileUtils.read(inputAndFile);
-			String decodado = coder.decode(dadosLidos);
+			byte[] dadosLidos = FileUtils.read(inputAndFile);
+			// Aki vai o código do Algorítmo de Decompressao;
+			byte[] decodado = coder.decode(dadosLidos);
 			
 			loading.dispose();
 			

@@ -15,13 +15,13 @@ public class FileSaver {
 		fileSaver.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		fileSaver.setCurrentDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator")+ "Downloads"));
 		
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter(".lzw", "lzw");
 		fileSaver.setFileFilter(filter);
 	}
 	
-	public File getSelectedFile(boolean isTxt){
-		if(isTxt){
-			File file = new File(fileSaver.getSelectedFile().getAbsolutePath()+ ".txt");
+	public File getSelectedFile(boolean isLzw){
+		if(isLzw){
+			File file = new File(fileSaver.getSelectedFile().getAbsolutePath()+ ".lzw");
 			return file;
 		}
 		return fileSaver.getSelectedFile();

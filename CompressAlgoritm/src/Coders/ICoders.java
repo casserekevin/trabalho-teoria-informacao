@@ -2,8 +2,8 @@ package Coders;
 
 public interface ICoders {
 	
-	public String encode(StringBuffer content);
+	public byte[] encode(byte[] content);
 	
-	public String decode(StringBuffer content);
+	public byte[] decode(byte[] content);
 
 }

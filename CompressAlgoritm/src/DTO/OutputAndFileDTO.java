@@ -1,20 +1,20 @@
 package DTO;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileWriter;
 
 public class OutputAndFileDTO implements IInputOutputDTO {
 
-	FileWriter output;
+	BufferedOutputStream output;
 	File file;
 	
-	public OutputAndFileDTO(FileWriter output, File file) {
+	public OutputAndFileDTO(BufferedOutputStream output, File file) {
 		this.output = output;
 		this.file = file;
 	}
 
 	@Override
-	public FileWriter getIO() {
+	public BufferedOutputStream getIO() {
 		return output;
 	}
 
